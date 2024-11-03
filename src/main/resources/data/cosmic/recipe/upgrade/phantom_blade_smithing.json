@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "cosmic:nanocite_alloy"
+  },
+  "base": {
+    "item": "minecraft:netherite_sword"
+  },
+  "result": {
+    "count": 1,
+    "id": "cosmic:phantom_blade"
+  },
+  "template": {
+    "item": "cosmic:nanocite_upgrade_smithing_template"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "id": "cosmic:nanocite_alloy",
+      "count": 1
+    },
+    "title": {
+      "translate": "A REAL upgrade"
+    },
+    "description": {
+      "translate": "Obtain a Nanocite Alloy"
+    },
+    "frame": "goal",
+    "hidden": true
+  },
+  "parent": "minecraft:nether/netherite_armor",
+  "criteria": {
+    "nanocite_alloy": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "cosmic:nanocite_alloy"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "nanocite_alloy"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

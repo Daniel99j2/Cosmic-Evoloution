@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "id": "cosmic:concentrated_dragons_breath",
+      "count": 1
+    },
+    "title": {
+      "translate": "Not so minty..."
+    },
+    "description": {
+      "translate": "Obtain a Concentrated Dragon's Breath"
+    },
+    "frame": "goal",
+    "hidden": true
+  },
+  "parent": "minecraft:end/dragon_breath",
+  "criteria": {
+    "concentrated_dragons_breath": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "cosmic:concentrated_dragons_breath"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "concentrated_dragons_breath"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

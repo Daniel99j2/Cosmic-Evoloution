@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "bbb",
+    "ses",
+    "rlr"
+  ],
+  "key": {
+    "b": {
+      "item": "cosmic:concentrated_dragons_breath"
+    },
+    "s": {
+      "item": "minecraft:sculk_vein"
+    },
+    "e": {
+      "item": "minecraft:ender_eye"
+    },
+    "r": {
+      "item": "minecraft:redstone"
+    },
+    "l": {
+      "item": "minecraft:lapis_lazuli"
+    }
+  },
+  "result": {
+    "id": "cosmic:nanobot_box"
+  },
+  "show_notification": true
+}
