@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package com.daniel99j.cosmic.block.blocks;
 
 import java.util.ArrayList;
@@ -12,6 +7,9 @@ import java.util.stream.Collectors;
 
 import com.daniel99j.cosmic.CosmicEvolution;
 import com.daniel99j.cosmic.CosmicEvolutionArcanaThings;
+import com.daniel99j.cosmic.block.ModBlocks;
+import com.daniel99j.cosmic.item.ModItems;
+import eu.pb4.polymer.virtualentity.api.BlockWithMovingElementHolder;
 import net.borisshoes.arcananovum.ArcanaRegistry;
 import net.borisshoes.arcananovum.core.ArcanaBlock;
 import net.borisshoes.arcananovum.core.ArcanaItem;
@@ -64,9 +62,9 @@ public class CosmicForge extends ArcanaBlock {
         this.rarity = ArcanaRarity.EMPOWERED;
         this.categories = new TomeGui.TomeFilter[]{TomeFilter.EMPOWERED, TomeFilter.BLOCKS, TomeFilter.FORGE};
         this.itemVersion = 0;
-        this.vanillaItem = Items.SCULK_SHRIEKER;
-        this.block = new CosmicForgeBlock(Settings.create().strength(2.5F, 1200.0F).sounds(BlockSoundGroup.WOOD));
-        this.item = new CosmicForgeItem(this.block, (new Item.Settings()).maxCount(1).fireproof().component(DataComponentTypes.ITEM_NAME, TextUtils.withColor(Text.literal("Cosmic Forge").formatted(Formatting.BOLD), 47226)).component(DataComponentTypes.LORE, new LoreComponent(this.getItemLore((ItemStack)null))).component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true));
+        this.vanillaItem = Items.SHROOMLIGHT;
+        this.block = ModBlocks.registerBlock("cosmic_forge", new CosmicForge.CosmicForgeBlock(AbstractBlock.Settings.create().strength(2.5F, 1200.0F).sounds(BlockSoundGroup.WOOD)));
+        this.item = ModItems.register("cosmic_forge", new CosmicForge.CosmicForgeItem(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ITEM_NAME, TextUtils.withColor(Text.literal("Cosmic Forge").formatted(Formatting.BOLD), 47226)).component(DataComponentTypes.LORE, new LoreComponent(CosmicForge.getItemLoreStatic((ItemStack)null))).component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
         ItemStack stack = new ItemStack(this.item);
         this.initializeArcanaTag(stack);
         stack.setCount(this.item.getMaxCount());
@@ -74,13 +72,25 @@ public class CosmicForge extends ArcanaBlock {
     }
 
     public List<Text> getItemLore(@Nullable ItemStack itemStack) {
+        return getItemLoreStatic(itemStack);
+    }
+
+
+    public static List<Text> getItemLoreStatic(@Nullable ItemStack itemStack) {
         List<MutableText> lore = new ArrayList();
         lore.add(Text.literal("").append(Text.literal("With the ").formatted(Formatting.DARK_PURPLE)).append(Text.literal("stars ").formatted(Formatting.WHITE)).append(Text.literal("as your witness...").formatted(Formatting.DARK_PURPLE)));
         lore.add(Text.literal("").append(Text.literal("Your ").formatted(Formatting.DARK_PURPLE)).append(Text.literal("journey ").formatted(Formatting.WHITE)).append(Text.literal("of ").formatted(Formatting.DARK_PURPLE)).append(Text.literal("forging ").formatted(Formatting.LIGHT_PURPLE)).append(Text.literal("new ").formatted(Formatting.DARK_PURPLE)).append(Text.literal("Arcana ").formatted(Formatting.LIGHT_PURPLE)).append(Text.literal("begins!").formatted(Formatting.DARK_PURPLE)));
         lore.add(Text.literal(""));
         lore.add(Text.literal("").append(Text.literal("The ").formatted(Formatting.DARK_PURPLE)).append(Text.literal("Forge").formatted(Formatting.LIGHT_PURPLE)).append(Text.literal(" lets you craft ").formatted(Formatting.DARK_PURPLE)).append(Text.literal("Arcana Items").formatted(Formatting.LIGHT_PURPLE)).append(Text.literal(" and ").formatted(Formatting.DARK_PURPLE)).append(Text.literal("enhanced equipment").formatted(Formatting.DARK_AQUA)).append(Text.literal(".").formatted(Formatting.DARK_PURPLE)));
         lore.add(Text.literal("").append(Text.literal("The ").formatted(Formatting.DARK_PURPLE)).append(Text.literal("Forge").formatted(Formatting.LIGHT_PURPLE)).append(Text.literal(" acts as a ").formatted(Formatting.DARK_PURPLE)).append(Text.literal("hub ").formatted(Formatting.DARK_AQUA)).append(Text.literal("for other ").formatted(Formatting.DARK_PURPLE)).append(Text.literal("Forge Structures").formatted(Formatting.LIGHT_PURPLE)).append(Text.literal(".").formatted(Formatting.DARK_PURPLE)));
-        this.addForgeLore(lore);
+
+        //forge structure lore
+        lore.add(Text.literal("Forge Structures:").formatted(new Formatting[]{Formatting.BOLD, Formatting.LIGHT_PURPLE}));
+        lore.add(Text.literal("").append(Text.literal("Are ").formatted(Formatting.DARK_PURPLE)).append(Text.literal("multiblock structures").formatted(Formatting.LIGHT_PURPLE)).append(Text.literal(" that must be ").formatted(Formatting.DARK_PURPLE)).append(Text.literal("built").formatted(Formatting.AQUA)).append(Text.literal(" in the ").formatted(Formatting.DARK_PURPLE)).append(Text.literal("world").formatted(Formatting.DARK_AQUA)).append(Text.literal(".").formatted(Formatting.DARK_PURPLE)));
+        lore.add(Text.literal("").append(Text.literal("Must ").formatted(Formatting.DARK_AQUA)).append(Text.literal("be ").formatted(Formatting.DARK_PURPLE)).append(Text.literal("placed ").formatted(Formatting.AQUA)).append(Text.literal("within a ").formatted(Formatting.DARK_PURPLE)).append(Text.literal("17x11x17").formatted(Formatting.DARK_AQUA)).append(Text.literal(" cube around a ").formatted(Formatting.DARK_PURPLE)).append(Text.literal("Starlight Forge").formatted(Formatting.LIGHT_PURPLE)).append(Text.literal(".").formatted(Formatting.DARK_PURPLE)));
+        lore.add(Text.literal("").append(Text.literal("Right Click").formatted(Formatting.DARK_AQUA)).append(Text.literal(" a ").formatted(Formatting.DARK_PURPLE)).append(Text.literal("completed ").formatted(Formatting.AQUA)).append(Text.literal("Forge Structure").formatted(Formatting.LIGHT_PURPLE)).append(Text.literal(" to ").formatted(Formatting.DARK_PURPLE)).append(Text.literal("use").formatted(Formatting.AQUA)).append(Text.literal(" it.").formatted(Formatting.DARK_PURPLE)));
+        lore.add(Text.literal("").append(Text.literal("Right Click").formatted(Formatting.DARK_AQUA)).append(Text.literal(" a ").formatted(Formatting.DARK_PURPLE)).append(Text.literal("Forge Structure").formatted(Formatting.LIGHT_PURPLE)).append(Text.literal(" to see a ").formatted(Formatting.DARK_PURPLE)).append(Text.literal("hologram ").formatted(Formatting.AQUA)).append(Text.literal("of the ").formatted(Formatting.DARK_PURPLE)).append(Text.literal("structure").formatted(Formatting.LIGHT_PURPLE)).append(Text.literal(".").formatted(Formatting.DARK_PURPLE)));
+
         return (List)lore.stream().map(TextUtils::removeItalics).collect(Collectors.toCollection(ArrayList::new));
     }
 
@@ -100,13 +110,13 @@ public class CosmicForge extends ArcanaBlock {
         return list;
     }
 
-    public class CosmicForgeBlock extends ArcanaPolymerBlockEntity {
+    public static class CosmicForgeBlock extends ArcanaPolymerBlockEntity implements BlockWithMovingElementHolder {
         public CosmicForgeBlock(AbstractBlock.Settings settings) {
             super(settings);
         }
 
         public BlockState getPolymerBlockState(BlockState state) {
-            return Blocks.SCULK_SHRIEKER.getDefaultState().with(SculkShriekerBlock.CAN_SUMMON, true).with(SculkShriekerBlock.SHRIEKING, true);
+            return Blocks.SHROOMLIGHT.getDefaultState();
         }
 
         public static @Nullable CosmicForgeBlockEntity getEntity(World world, BlockPos pos) {
@@ -156,8 +166,8 @@ public class CosmicForge extends ArcanaBlock {
     }
 
     public class CosmicForgeItem extends ArcanaPolymerBlockItem {
-        public CosmicForgeItem(Block block, Item.Settings settings) {
-            super(CosmicForge.this.getThis(), block, settings);
+        public CosmicForgeItem(Item.Settings settings) {
+            super(CosmicForge.this.getThis(), CosmicForge.this.getBlock(), settings);
         }
 
         public ItemStack getDefaultStack() {

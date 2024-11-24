@@ -20,6 +20,12 @@
 		],
 		"fabric-datagen": [
 			"com.daniel99j.cosmic.CosmicEvolutionDataGenerator"
+		],
+		"cardinal-components-chunk": [
+			"com.daniel99j.cosmic.misc.ModChunkComponents"
+		],
+		"cardinal-components-entity": [
+			"com.daniel99j.cosmic.misc.ModEntityComponents"
 		]
 	},
 	"mixins": [
@@ -29,9 +35,16 @@
 		"fabricloader": ">=0.16.7",
 		"minecraft": "~1.21.1",
 		"java": ">=21",
-		"fabric-api": "*"
+		"fabric-api": "*",
+		"arcananovum":  "*"
 	},
 	"suggests": {
 		"another-mod": "*"
+	},
+	"custom": {
+		"cardinal-components": [
+			"cosmic:regenerating_blocks",
+			"cosmic:pvp_data"
+		]
 	}
 }

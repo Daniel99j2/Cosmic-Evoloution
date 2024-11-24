@@ -3,9 +3,14 @@
   "package": "com.daniel99j.cosmic.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "ArcanaLoadsMixin",
     "BeaconBlockMixin",
+    "DamageAmpMixin",
     "EntityMixin",
-    "PlayerMixin"
+    "GreaterBlindnessMixin",
+    "GreaterInvisibilityMixin",
+    "LivingEntityMixin",
+    "ShadowStalkersGlaiveMixin"
   ],
   "injectors": {
     "defaultRequire": 1

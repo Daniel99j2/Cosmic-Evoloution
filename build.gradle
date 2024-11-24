@@ -61,10 +61,11 @@ dependencies {
 
 	modImplementation include("org.ladysnake.cardinal-components-api:cardinal-components-base:${cardinal_components_version}")
 	modImplementation include("org.ladysnake.cardinal-components-api:cardinal-components-world:${cardinal_components_version}")
+	modImplementation include("org.ladysnake.cardinal-components-api:cardinal-components-chunk:${cardinal_components_version}")
 	modImplementation include("org.ladysnake.cardinal-components-api:cardinal-components-entity:${cardinal_components_version}")
 
 	modImplementation include('maven.modrinth:arcana-novum:3.0.5+1.21.1')
-
+	modImplementation include("maven.modrinth:sandstorm:0.2.0-beta.1+1.21")
 }
 
 processResources {

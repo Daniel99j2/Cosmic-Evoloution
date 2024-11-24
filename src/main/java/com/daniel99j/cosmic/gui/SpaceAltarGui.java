@@ -1,25 +1,17 @@
 package com.daniel99j.cosmic.gui;
 
-import com.daniel99j.cosmic.block.blocks.CosmicForgeBlockEntity;
+import com.daniel99j.cosmic.block.blocks.SpaceAltarBlockEntity;
 import eu.pb4.sgui.api.ClickType;
 import eu.pb4.sgui.api.elements.GuiElementBuilder;
 import eu.pb4.sgui.api.gui.SimpleGui;
-
-import java.util.Iterator;
-
-import net.borisshoes.arcananovum.blocks.forge.StarlightForgeBlockEntity;
-import net.borisshoes.arcananovum.gui.midnightenchanter.MidnightEnchanterInventory;
-import net.borisshoes.arcananovum.gui.midnightenchanter.MidnightEnchanterSlot;
 import net.borisshoes.arcananovum.items.normal.GraphicItems;
 import net.borisshoes.arcananovum.items.normal.GraphicalItem;
 import net.borisshoes.arcananovum.utils.MiscUtils;
 import net.borisshoes.arcananovum.utils.TextUtils;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.screen.ScreenHandlerType;
-import net.minecraft.screen.slot.Slot;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -27,12 +19,14 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 
-public class CosmicForgeGui extends SimpleGui {
-    private final CosmicForgeBlockEntity blockEntity;
+import java.util.Iterator;
+
+public class SpaceAltarGui extends SimpleGui {
+    private final SpaceAltarBlockEntity blockEntity;
     private final DefaultedList<ItemStack> ingredients;
     private CosmicForgeInventory inv;
 
-    public CosmicForgeGui(ServerPlayerEntity player, CosmicForgeBlockEntity blockEntity) {
+    public SpaceAltarGui(ServerPlayerEntity player, SpaceAltarBlockEntity blockEntity) {
         super(ScreenHandlerType.GENERIC_9X3, player, false);
         this.blockEntity = blockEntity;
         this.ingredients = DefaultedList.of();

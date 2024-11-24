@@ -5,46 +5,39 @@
 
 package com.daniel99j.cosmic.block.blocks;
 
+import com.daniel99j.cosmic.CosmicEvolution;
 import com.daniel99j.cosmic.CosmicEvolutionArcanaThings;
 import com.daniel99j.cosmic.gui.CosmicForgeGui;
+import com.daniel99j.cosmic.gui.SpaceAltarGui;
+import de.tomalbrc.sandstorm.Sandstorm;
+import de.tomalbrc.sandstorm.util.ParticleUtil;
 import eu.pb4.polymer.core.api.utils.PolymerObject;
-
-import java.util.*;
-
 import net.borisshoes.arcananovum.ArcanaNovum;
 import net.borisshoes.arcananovum.ArcanaRegistry;
-import net.borisshoes.arcananovum.achievements.ArcanaAchievements;
 import net.borisshoes.arcananovum.augments.ArcanaAugment;
 import net.borisshoes.arcananovum.augments.ArcanaAugments;
 import net.borisshoes.arcananovum.blocks.forge.StarlightForge;
 import net.borisshoes.arcananovum.core.ArcanaBlockEntity;
 import net.borisshoes.arcananovum.core.ArcanaItem;
-import net.borisshoes.arcananovum.core.Multiblock;
-import net.borisshoes.arcananovum.core.MultiblockCore;
-import net.borisshoes.arcananovum.gui.arcanetome.TomeGui;
-import net.borisshoes.arcananovum.gui.starlightforge.EnhancedForgingGui;
-import net.borisshoes.arcananovum.gui.starlightforge.StarlightForgeGui;
-import net.borisshoes.arcananovum.utils.MiscUtils;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BarrelBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.ChestBlockEntity;
-import net.minecraft.block.entity.ShulkerBoxBlockEntity;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.GeneratorOptions;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector2f;
 
-public class CosmicForgeBlockEntity extends BlockEntity implements PolymerObject, ArcanaBlockEntity {
+import java.util.Iterator;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class SpaceAltarBlockEntity extends BlockEntity implements PolymerObject, ArcanaBlockEntity {
     private TreeMap<ArcanaAugment, Integer> augments;
     private String crafterId;
     private String uuid;
@@ -52,8 +45,8 @@ public class CosmicForgeBlockEntity extends BlockEntity implements PolymerObject
     private String customName;
     private boolean seenForge;
 
-    public CosmicForgeBlockEntity(BlockPos pos, BlockState state) {
-        super(CosmicEvolutionArcanaThings.COSMIC_FORGE_BLOCK_ENTITY, pos, state);
+    public SpaceAltarBlockEntity(BlockPos pos, BlockState state) {
+        super(CosmicEvolutionArcanaThings.SPACE_ALTAR_BLOCK_ENTITY, pos, state);
         if(this.uuid == null)
             this.uuid = "invalid";
     }
@@ -67,16 +60,15 @@ public class CosmicForgeBlockEntity extends BlockEntity implements PolymerObject
     }
 
     public void openGui(ServerPlayerEntity player) {
-        CosmicForgeGui gui = new CosmicForgeGui(player, this);
+        SpaceAltarGui gui = new SpaceAltarGui(player, this);
         gui.buildGui();
         gui.open();
     }
 
     public static <E extends BlockEntity> void ticker(World world, BlockPos blockPos, BlockState blockState, E e) {
-        if (e instanceof CosmicForgeBlockEntity forge) {
+        if (e instanceof SpaceAltarBlockEntity forge) {
             forge.tick();
         }
-
     }
 
     private void tick() {
@@ -90,6 +82,9 @@ public class CosmicForgeBlockEntity extends BlockEntity implements PolymerObject
                 ArcanaNovum.addActiveBlock(new Pair(this, this));
             }
 
+            if (serverWorld.getServer().getTicks() % 36 == 0 && this.isAssembled()) {
+                ParticleUtil.emit(Identifier.of(CosmicEvolution.MOD_ID, "space_altar_ambient"), (ServerWorld) this.getWorld(), Vec3d.of(this.getPos()), new Vector2f(0, 0));
+            }
         }
     }
 
